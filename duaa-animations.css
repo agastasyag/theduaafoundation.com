@@ -1,0 +1,65 @@
+/* ===========================================================
+   duaa-animations.css  ·  Duaa Foundation micro-interactions
+   ==========================================================*/
+
+/* 1. Scroll-reveal (fade-up) */
+[data-animate]{
+  opacity:0;
+  transform:translateY(30px);
+  transition:
+    opacity   .6s ease-out,
+    transform .6s ease-out;
+  will-change:opacity,transform;
+}
+[data-animate].in{
+  opacity:1;
+  transform:none;
+}
+
+/* Optional stagger delays (add data-delay="1|2|3" in HTML) */
+[data-animate][data-delay="1"]{transition-delay:.1s;}
+[data-animate][data-delay="2"]{transition-delay:.2s;}
+[data-animate][data-delay="3"]{transition-delay:.3s;}
+
+/* Respect “Reduce Motion” user-pref */
+@media (prefers-reduced-motion: reduce){
+  [data-animate],
+  [data-animate].in{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+}
+
+/* 2. Active link underline in nav */
+.nav-links a.active{
+  border-bottom:2px solid var(--brand-gold);
+}
+
+/* 3. Smooth-scroll behavior fallback for browsers
+      that don’t support the JS easing (just in case) */
+html{
+  scroll-behavior:smooth;
+}
+
+/* 4. Tweaks for very small devices */
+@media (max-width:480px){
+  .hero h1{font-size:1.8rem;}
+  .hero p{font-size:1rem;}
+
+  /* Make cards full-width stack with more spacing */
+  .program-cards{gap:2rem;}
+}
+
+/* 5. Subtle hover lift for interactive cards/buttons */
+.card,
+.btn{
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.card:hover,
+.card:focus-within,
+.btn:hover,
+.btn:focus{
+  transform:translateY(-4px);
+  box-shadow:0 4px 10px rgb(0 0 0 /.08);
+}
