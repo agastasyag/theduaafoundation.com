@@ -1,58 +1,303 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Duaa Foundation</title>
-  <!-- Optional: include Bootstrap CSS from CDN -->
-  <link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
-    rel="stylesheet"
-  >
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ----------  COLOR TOKENS  ---------- */
+    :root{
+      --brand-navy:   #1E3A8A;  /* primary dark */
+      --brand-blue:   #2563EB;  /* link / hover */
+      --brand-green:  #1F9D55;  /* secondary accent */
+      --brand-gold:   #F9B233;  /* call-to-action */
+      --gray-700:     #6B7280;  /* muted text */
+      --bg-light:     #F5F7FA;  /* page background */
+      --white:        #ffffff;
+    }
+
+    /* ----------  GLOBAL RESET  ---------- */
+    *,*::before,*::after{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      line-height:1.6;
+      color:var(--brand-navy);
+      background:var(--bg-light);
+    }
+    img{max-width:100%;display:block;}
+
+    /* ----------  LAYOUT HELPERS  ---------- */
+    .container{
+      width:90%;
+      max-width:1180px;
+      margin-inline:auto;
+      padding-block:3rem;
+    }
+    .btn{
+      display:inline-block;
+      padding:.75rem 1.5rem;
+      font-weight:600;
+      text-decoration:none;
+      border-radius:.375rem;
+      transition:background .25s;
+    }
+    .btn--primary{
+      background:var(--brand-gold);
+      color:var(--brand-navy);
+    }
+    .btn--primary:hover,
+    .btn--primary:focus{
+      background:#E4A82D;
+    }
+
+    /* ----------  NAV  ---------- */
+    header{
+      background:var(--brand-navy);
+    }
+    nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      padding:1rem 0;
+      color:var(--white);
+    }
+    nav a{
+      color:var(--white);
+      text-decoration:none;
+      margin-left:1.5rem;
+      font-weight:600;
+    }
+    nav a:hover,
+    nav a:focus{
+      text-decoration:underline;
+    }
+    .logo{
+      font-size:1.375rem;
+      font-weight:700;
+    }
+
+    /* ----------  HERO  ---------- */
+    .hero{
+      text-align:center;
+      padding-block:4.5rem 5rem;
+      background:url('https://placehold.co/1600x850') center/cover no-repeat;
+      position:relative;
+      color:var(--white);
+    }
+    .hero::before{
+      content:'';
+      position:absolute;inset:0;
+      background:rgba(30,58,138,.75);
+    }
+    .hero > *{position:relative; z-index:1;}
+    .hero h1{
+      font-size:clamp(2.25rem,5vw,3.5rem);
+      margin-bottom:1rem;
+    }
+    .hero p{
+      max-width:680px;
+      margin-inline:auto 2rem;
+      margin-bottom:2rem;
+      font-size:1.125rem;
+    }
+
+    /* ----------  SECTIONS  ---------- */
+    section h2{
+      font-size:2rem;
+      margin-bottom:1rem;
+      position:relative;
+    }
+    section h2::after{
+      content:'';
+      width:3rem;
+      height:.25rem;
+      background:var(--brand-green);
+      position:absolute;
+      bottom:-.5rem;
+      left:0;
+      border-radius:.125rem;
+    }
+    .about{
+      display:grid;
+      gap:2.5rem;
+      grid-template-columns:1fr 1fr;
+    }
+    .program-cards{
+      display:grid;
+      gap:1.75rem;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    }
+    .card{
+      background:var(--white);
+      border-radius:.5rem;
+      padding:1.5rem;
+      box-shadow:0 1px 3px rgba(0,0,0,.06);
+    }
+    .card h3{
+      margin-top:0;
+      color:var(--brand-blue);
+    }
+    .card p{
+      color:var(--gray-700);
+    }
+
+    /* ----------  DONATE BANNER  ---------- */
+    .cta{
+      text-align:center;
+      padding:3rem 1rem;
+      background:var(--brand-green);
+      color:var(--white);
+    }
+    .cta h2{
+      color:var(--white);
+      margin-bottom:.5rem;
+    }
+
+    /* ----------  FOOTER  ---------- */
+    footer{
+      background:var(--brand-navy);
+      color:var(--white);
+      padding:2rem 0;
+      font-size:.875rem;
+    }
+    .footer-grid{
+      display:grid;
+      gap:2rem;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      align-items:start;
+    }
+    footer a{
+      color:var(--white);
+      text-decoration:none;
+    }
+    footer a:hover{text-decoration:underline;}
+
+    /* ----------  RESPONSIVE TWEAKS  ---------- */
+    @media(max-width:750px){
+      .about{grid-template-columns:1fr;}
+      nav a{margin-left:.75rem;}
+    }
+  </style>
 </head>
+
 <body>
-  <!-- Top navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Duaa Foundation</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-          data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" 
-               data-bs-toggle="dropdown">Initiatives</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Program A</a></li>
-              <li><a class="dropdown-item" href="#">Program B</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-        </ul>
+  <!-- =====  NAVIGATION  ===== -->
+  <header>
+    <div class="container">
+      <nav aria-label="Main">
+        <div class="logo">The Duaa Foundation</div>
+        <div class="nav-links" role="navigation">
+          <a href="#about">About&nbsp;Us</a>
+          <a href="#programs">Programs</a>
+          <a href="#impact">Impact</a>
+          <a href="#contact">Contact</a>
+          <a href="#donate" class="btn btn--primary">Donate</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =====  HERO  ===== -->
+  <section class="hero" role="banner">
+    <div class="container">
+      <h1>Empowering Every Child to Learn &amp; Thrive</h1>
+      <p>Your support funds school supplies, mentoring and safe learning spaces for underserved students across our region.</p>
+      <a href="#donate" class="btn btn--primary">Give Today</a>
+    </div>
+  </section>
+
+  <!-- =====  ABOUT  ===== -->
+  <section id="about" class="container">
+    <h2>Who We Are</h2>
+    <div class="about">
+      <p>
+        The Duaa Foundation is a registered non-profit that partners with community schools
+        to deliver quality education resources, after-school tutoring and scholarship aid.
+        Founded in 2012, we have reached more than <strong>12,000</strong> learners in rural
+        and urban centres.
+      </p>
+      <img src="https://placehold.co/600x400" alt="Students studying together in a classroom">
+    </div>
+  </section>
+
+  <!-- =====  PROGRAMS  ===== -->
+  <section id="programs" class="container">
+    <h2>Our Programs</h2>
+    <div class="program-cards">
+      <article class="card" aria-labelledby="supplies">
+        <h3 id="supplies">School Supplies Drive</h3>
+        <p>Annual distribution of notebooks, uniforms and digital tablets to equip children for effective learning.</p>
+      </article>
+
+      <article class="card" aria-labelledby="mentoring">
+        <h3 id="mentoring">Peer Mentoring</h3>
+        <p>Trained volunteer mentors guide students in goal-setting, study skills and building self-confidence.</p>
+      </article>
+
+      <article class="card" aria-labelledby="scholarships">
+        <h3 id="scholarships">Scholarship Fund</h3>
+        <p>Need-based tuition awards open the door to higher education for promising youth from low-income families.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- =====  IMPACT  ===== -->
+  <section id="impact" class="cta" aria-labelledby="impact-heading">
+    <h2 id="impact-heading">Your Impact in 2024</h2>
+    <p>♦ 2,300 backpacks distributed ♦ 800 students mentored ♦ 92% pass rate achieved</p>
+    <a href="#donate" class="btn btn--primary">Become a Donor</a>
+  </section>
+
+  <!-- =====  CONTACT / DONATE  ===== -->
+  <section id="contact" class="container">
+    <h2>Get In Touch</h2>
+    <p>Questions? Partnerships? Email us at <a href="mailto:info@duaa-foundation.org">info@duaa-foundation.org</a> or call +91-98765-43210.</p>
+  </section>
+
+  <!-- =====  FOOTER  ===== -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <strong>The Duaa Foundation</strong><br>
+        Reg. No 2156-E-KL • © 2025
+      </div>
+      <div>
+        <strong>Location</strong><br>
+        5-B Knowledge Park,<br>
+        Kochi 682 030, Kerala
+      </div>
+      <div>
+        <strong>Quick Links</strong><br>
+        <a href="#about">About</a><br>
+        <a href="#programs">Programs</a><br>
+        <a href="#impact">Impact</a>
+      </div>
+      <div>
+        <strong>Social</strong><br>
+        <a href="#" aria-label="Facebook">Facebook</a><br>
+        <a href="#" aria-label="Instagram">Instagram</a><br>
+        <a href="#" aria-label="LinkedIn">LinkedIn</a>
       </div>
     </div>
-  </nav>
+  </footer>
 
-  <main class="container py-5">
-    <h1>Welcome to The Duaa Foundation</h1>
-    <p>Your mission statement goes here.</p>
-
-    <main class="container py-5">
-  <h1>Welcome to The Duaa Foundation</h1>
-  <p>Your mission statement goes here.</p>
-
-  <h2></h2>
- <div data-tf-live="01JYEFGJTSV6FC2T9ZJ6SM19VB"></div><script src="//embed.typeform.com/next/embed.js"></script>
-</main>
-
-  <!-- Optional: include Bootstrap JS bundle from CDN -->
-  <script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+  <!-- OPTIONAL: Smooth-scroll for anchor links -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(link=>{
+      link.addEventListener('click',e=>{
+        const target=document.querySelector(link.getAttribute('href'));
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
   </script>
 </body>
 </html>
- 
