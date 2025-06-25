@@ -165,31 +165,23 @@
 <body>
 <!-- =====  COMING-SOON OVERLAY  ===== -->
 <style>
-  /* Overlay wrapper */
   #coming-soon-overlay{
-    position:fixed;           /* Sit on top of everything */
-    inset:0;                  /* top:0; right:0; bottom:0; left:0 */
-    z-index:10_000;           /* higher than anything you already use */
-    
-    display:flex;             /* center the text */
-    align-items:center;
-    justify-content:center;
-    
-    /* Create the blur */
+    position:fixed;
+    inset:0;
+    z-index:10000;                 /* ← fixed */
+    display:flex;align-items:center;justify-content:center;
+
     backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);    /* Safari */
-    
-    /* Semi-opaque wash so text stands out */
+    -webkit-backdrop-filter:blur(8px);
+
     background:rgba(255,255,255,.55);
-    
-    /* Optional: smooth fade-in */
     animation:fadeIn .6s ease both;
   }
   #coming-soon-overlay h1{
     margin:0;
     font-size:clamp(2rem,5vw + 1rem,4rem);
     font-weight:700;
-    color:var(--brand-navy, #1E3A8A);
+    color:var(--brand-navy,#1E3A8A);
     text-transform:uppercase;
     letter-spacing:.05em;
   }
